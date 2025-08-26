@@ -6,6 +6,8 @@ app = Flask(__name__)
 @app.route("/unknown")
 def ubicacion():
     ip = request.headers.get('X-Forwarded-For', request.remote_addr)
+    if ip and "," in ip:
+        ip = ip.split(",")[0].strip()
 
     # Obtener ubicación aproximada por IP
     try:
